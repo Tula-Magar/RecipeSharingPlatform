@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using RecipeSharingPlatform.Data;
+
 namespace RecipeSharingPlatform
 {
     public class Program
@@ -9,6 +12,8 @@ namespace RecipeSharingPlatform
             // Add services to the container.
             builder.Services.AddRazorPages();
 
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
