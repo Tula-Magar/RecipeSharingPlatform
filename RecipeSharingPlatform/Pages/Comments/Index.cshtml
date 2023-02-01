@@ -1,0 +1,42 @@
+﻿@page
+@model RecipeSharingPlatform.Pages.Comments.IndexModel
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment[0].CommentText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment[0].Recipe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment[0].User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Comment) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommentText)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Recipe.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Email)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.CommentId">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.CommentId">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.CommentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
