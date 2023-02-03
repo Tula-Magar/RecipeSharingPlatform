@@ -1,9 +1,20 @@
 ﻿@page
 @model RecipeSharingPlatform.Pages.Recipes.IndexModel
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+<div class="container pt-5">
+
+    <div class="row p-3">
+        <div class="col-6">
+             <h2 class="text-primary">Recipe List</h2>
+        </div>
+         <div class="col-6 text-end">
+             <a asp-page="Create" class="btn btn-primary">
+                 <i class="bi bi-plus-circle"></i> 
+                 &nbsp Create New
+             </a>
+        </div>
+    </div>
+
 <table class="table">
     <thead>
         <tr>
@@ -68,11 +79,20 @@
                 @Html.DisplayFor(modelItem => item.User.Email)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.RecipeId">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.RecipeId">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.RecipeId">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.RecipeId" class="btn btn-primary">
+                    <i class="bi bi-pencil-square"></i>&nbsp 
+                 </a> |
+                 
+                 <a asp-page="./Details" asp-route-id="@item.RecipeId" class="btn btn-primary">
+                      <i class="bi bi-ticket-detailed"></i>
+                 </a> |
+                 
+                 <a asp-page="./Delete" asp-route-id="@item.RecipeId" class="btn btn-primary"> 
+                     <i class="bi bi-trash3"></i>
+                  </a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+</div>
