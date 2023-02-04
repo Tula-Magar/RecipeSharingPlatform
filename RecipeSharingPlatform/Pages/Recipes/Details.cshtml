@@ -61,7 +61,12 @@
         </dd>
     </dl>
 </div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Recipe?.RecipeId">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+<div class="row">
+    <div class="col-md-6">
+        <a asp-page="./Edit" asp-route-id="@Model.Recipe.RecipeId" class="btn btn-primary">Edit</a> 
+    </div>
+
+     <div class="col-md-6">
+        <a asp-page="./Index" class="btn btn-primary">Back to List</a>
+    </div>
 </div>

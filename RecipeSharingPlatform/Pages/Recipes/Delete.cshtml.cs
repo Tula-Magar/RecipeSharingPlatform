@@ -29,7 +29,11 @@ namespace RecipeSharingPlatform.Pages.Recipes
                 return NotFound();
             }
 
-            var recipe = await _context.Recipes.FirstOrDefaultAsync(m => m.RecipeId == id);
+            var recipe = await _context.Recipes
+                .Include(r => r.Category)
+                .Include(r => r.RecipeType)
+                .Include(r => r.User)
+                .FirstOrDefaultAsync(m => m.RecipeId == id);
 
             if (recipe == null)
             {

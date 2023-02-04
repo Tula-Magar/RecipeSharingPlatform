@@ -30,15 +30,15 @@ namespace RecipeSharingPlatform.Pages.Recipes
                 return NotFound();
             }
 
-            var recipe =  await _context.Recipes.FirstOrDefaultAsync(m => m.RecipeId == id);
+            var recipe = await _context.Recipes.FirstOrDefaultAsync(m => m.RecipeId == id);
             if (recipe == null)
             {
                 return NotFound();
             }
             Recipe = recipe;
-           ViewData["CategoryId"] = new SelectList(_context.Categories, "ID", "Name");
-           ViewData["RecipeTypeId"] = new SelectList(_context.RecipeTypes, "ID", "Name");
-           ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "ID", "Name");
+            ViewData["RecipeTypeId"] = new SelectList(_context.RecipeTypes, "ID", "Name");
+            ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email");
             return Page();
         }
 
@@ -46,8 +46,27 @@ namespace RecipeSharingPlatform.Pages.Recipes
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
+            if (Recipe.Description == "&nbsp;")
+            {
+                Recipe.Description = "";
+            }
+
+            if (Recipe.Ingredients == "&nbsp;")
+            {
+                Recipe.Ingredients = "";
+            }
+
+            if (Recipe.Instructions == "&nbsp;")
+            {
+                Recipe.Instructions = "";
+            }
+
+
             if (!ModelState.IsValid)
             {
+                ViewData["CategoryId"] = new SelectList(_context.Categories, "ID", "Name");
+                ViewData["RecipeTypeId"] = new SelectList(_context.RecipeTypes, "ID", "Name");
+                ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email");
                 return Page();
             }
 
