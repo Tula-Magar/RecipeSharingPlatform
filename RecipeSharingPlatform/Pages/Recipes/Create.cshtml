@@ -1,65 +1,88 @@
 ﻿@page
 @model RecipeSharingPlatform.Pages.Recipes.CreateModel
 
-<h4>Recipe</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
+<div class="container pt-5">
+        
+        <h4 class="text-primary">Recipe</h4>
+        <hr />
+
+        <form method="post" class="row g-3">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+            <div class="col-12">
                 <label asp-for="Recipe.Title" class="control-label"></label>
                 <input asp-for="Recipe.Title" class="form-control" />
                 <span asp-validation-for="Recipe.Title" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Recipe.Description" class="control-label"></label>
-                <input asp-for="Recipe.Description" class="form-control" />
-                <span asp-validation-for="Recipe.Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Recipe.Ingredients" class="control-label"></label>
-                <input asp-for="Recipe.Ingredients" class="form-control" />
-                <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Recipe.Instructions" class="control-label"></label>
-                <input asp-for="Recipe.Instructions" class="form-control" />
-                <span asp-validation-for="Recipe.Instructions" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+             <div class="col-md-6">
                 <label asp-for="Recipe.ImageUrl" class="control-label"></label>
                 <input asp-for="Recipe.ImageUrl" class="form-control" />
                 <span asp-validation-for="Recipe.ImageUrl" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-md-6">
+                <label asp-for="Recipe.UserId" class="control-label"></label>
+                <select asp-for="Recipe.UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
+            </div>
+             <div class="col-sm">
                 <label asp-for="Recipe.Rating" class="control-label"></label>
                 <input asp-for="Recipe.Rating" class="form-control" />
                 <span asp-validation-for="Recipe.Rating" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="col-sm">
                 <label asp-for="Recipe.RecipeTypeId" class="control-label"></label>
                 <select asp-for="Recipe.RecipeTypeId" class ="form-control" asp-items="ViewBag.RecipeTypeId"></select>
             </div>
-            <div class="form-group">
+            <div class="col-sm">
                 <label asp-for="Recipe.CategoryId" class="control-label"></label>
                 <select asp-for="Recipe.CategoryId" class ="form-control" asp-items="ViewBag.CategoryId"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="Recipe.UserId" class="control-label"></label>
-                <select asp-for="Recipe.UserId" class ="form-control" asp-items="ViewBag.UserId"></select>
+            
+            <div class="col-12">
+                <label asp-for="Recipe.Description" class="control-label"></label>
+                <textarea asp-for="Recipe.Description" class="summernote form-control"></textarea>
+                <span asp-validation-for="Recipe.Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="col-12">
+                <label asp-for="Recipe.Ingredients" class="control-label"></label>
+                 <textarea asp-for="Recipe.Ingredients" class="summernote form-control"></textarea>
+                <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label asp-for="Recipe.Instructions" class="control-label"></label>
+                 <textarea asp-for="Recipe.Instructions" class="summernote form-control"></textarea>
+                <span asp-validation-for="Recipe.Instructions" class="text-danger"></span>
+            </div>
+             <div class="row p-3">
+                <div class="col-6">
+                     <a class="btn btn-primary" asp-page="Index">Back to List</a>
+                </div>
+                 <div class="col-6 text-end">
+                      <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
             </div>
         </form>
-    </div>
+
+        
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+         
+            $(document).ready(function() {
+                $('.summernote').summernote({
+                        toolbar: [
+                            // [groupName, [list of button]]
+                            ['style', ['bold', 'italic', 'underline', 'clear']],
+                            ['font', ['strikethrough', 'superscript', 'subscript']],
+                            ['fontname', ['fontname']],
+                            ['fontsize', ['fontsize']],
+                            ['color', ['color']],
+                            ['para', ['ul', 'ol', 'paragraph']],
+                            ['view', ['fullscreen', 'codeview', 'help']],
+                            ]
+                });
+            });
+    </script>
 }
