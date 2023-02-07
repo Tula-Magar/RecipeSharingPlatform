@@ -41,6 +41,9 @@ namespace RecipeSharingPlatform.Pages.Recipes
             }
             else 
             {
+                recipe.Description = System.Net.WebUtility.HtmlDecode(recipe.Description);
+                recipe.Ingredients = System.Net.WebUtility.HtmlDecode(recipe.Ingredients);
+                recipe.Instructions = System.Net.WebUtility.HtmlDecode(recipe.Instructions);
                 Recipe = recipe;
             }
             return Page();

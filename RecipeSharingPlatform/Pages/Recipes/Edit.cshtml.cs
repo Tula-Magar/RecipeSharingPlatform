@@ -39,6 +39,7 @@ namespace RecipeSharingPlatform.Pages.Recipes
             ViewData["CategoryId"] = new SelectList(_context.Categories, "ID", "Name");
             ViewData["RecipeTypeId"] = new SelectList(_context.RecipeTypes, "ID", "Name");
             ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email");
+
             return Page();
         }
 

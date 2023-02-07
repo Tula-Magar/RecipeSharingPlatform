@@ -29,6 +29,13 @@ namespace RecipeSharingPlatform.Pages.Recipes
                 .Include(r => r.Category)
                 .Include(r => r.RecipeType)
                 .Include(r => r.User).ToListAsync();
+
+                foreach (var recipe in Recipe)
+                {
+                    recipe.Description = System.Net.WebUtility.HtmlDecode(recipe.Description);
+                    recipe.Ingredients = System.Net.WebUtility.HtmlDecode(recipe.Ingredients);
+                    recipe.Instructions = System.Net.WebUtility.HtmlDecode(recipe.Instructions);
+                }
             }
         }
     }

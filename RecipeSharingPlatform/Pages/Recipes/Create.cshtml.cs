@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -41,6 +42,15 @@ namespace RecipeSharingPlatform.Pages.Recipes
                 ViewData["UserId"] = new SelectList(_context.Users, "UserId", "Email");
                 return Page();
             }
+
+            Recipe.Instructions = Regex.Replace(Recipe.Instructions, "<.*?>", string.Empty);
+            Recipe.Instructions = System.Text.Encodings.Web.HtmlEncoder.Default.Encode(Recipe.Instructions);
+
+            Recipe.Description = Regex.Replace(Recipe.Description, "<.*?>", string.Empty);
+            Recipe.Description = System.Text.Encodings.Web.HtmlEncoder.Default.Encode(Recipe.Description);
+
+            Recipe.Ingredients = Regex.Replace(Recipe.Ingredients, "<.*?>", string.Empty);
+            Recipe.Ingredients = System.Text.Encodings.Web.HtmlEncoder.Default.Encode(Recipe.Ingredients);
 
             _context.Recipes.Add(Recipe);
             await _context.SaveChangesAsync();

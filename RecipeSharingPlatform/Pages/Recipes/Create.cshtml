@@ -25,7 +25,7 @@
             </div>
              <div class="col-sm">
                 <label asp-for="Recipe.Rating" class="control-label"></label>
-                <input asp-for="Recipe.Rating" class="form-control" />
+                <input asp-for="Recipe.Rating" class="form-control" id="ratingInput" min="1" max="5" onchange="limitMaxValue()" />
                 <span asp-validation-for="Recipe.Rating" class="text-danger"></span>
             </div>
             <div class="col-sm">
@@ -85,5 +85,11 @@
                             ]
                 });
             });
+            
+            function limitMaxValue() {
+                if (document.getElementById("ratingInput").value > 5) {
+                    document.getElementById("ratingInput").value = 5;
+                }
+            }
     </script>
 }

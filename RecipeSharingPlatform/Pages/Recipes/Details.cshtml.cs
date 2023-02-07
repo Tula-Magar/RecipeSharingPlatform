@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Encodings.Web;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -27,7 +29,7 @@ namespace RecipeSharingPlatform.Pages.Recipes
             {
                 return NotFound();
             }
-
+           
             var recipe = await _context.Recipes
                 .Include(r => r.Category)
                 .Include(r => r.RecipeType)
@@ -40,7 +42,12 @@ namespace RecipeSharingPlatform.Pages.Recipes
             }
             else 
             {
+                
+                recipe.Description = System.Net.WebUtility.HtmlDecode(recipe.Description);
+                recipe.Ingredients = System.Net.WebUtility.HtmlDecode(recipe.Ingredients);
+                recipe.Instructions = System.Net.WebUtility.HtmlDecode(recipe.Instructions);
                 Recipe = recipe;
+
             }
             return Page();
         }
